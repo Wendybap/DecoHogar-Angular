@@ -1,0 +1,213 @@
+<h1>DecoHogar</h1>
+<h1>Formulario</h1>
+<form class="form" (ngSubmit)="onRegister()" #myForm="ngForm">
+  <div>
+    <label for="name">Nombre</label>
+    <input
+      class="input-group"
+      type="text"
+      name="name"
+      required
+      id="name"
+      placeholder="Nombre"
+      [(ngModel)]="register.name"
+    />
+    <p class="error-sms" [class.valid.length]="myForm.invalid">
+      Debe colocar su nombre
+    </p>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input
+      class="input-group"
+      type="email"
+      name="email"
+      required
+      id="email"
+      placeholder="ejemplo@ejemplo.com"
+      [(ngModel)]="register.email"
+    />
+    <p>Debe colocar su Email</p>
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input
+      class="input-group"
+      type="password"
+      name="password"
+      required
+      id="password"
+      [(ngModel)]="register.password"
+    />
+    <p>Debe colocar su password</p>
+  </div>
+  <div class="btnCenter">
+    <button class="button" [disabled]="myForm.invalid" type="submit">
+      Registrar
+    </button>
+    <button class="button" type="button">Acción</button>
+  </div>
+</form>
+
+<h1>Class & Style</h1>
+<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name" />
+<br />
+<br />
+<hr
+  class="line-error"
+  [ngClass]="{
+    valid: nameInput.valid,
+    invalid: nameInput.invalid
+  }"
+/>
+<br />
+<p
+  class="message--error"
+  [ngClass]="{
+    valid: nameInput.valid,
+    invalid: nameInput.invalid
+  }"
+>
+  El campo es requerido
+</p>
+<br />
+<br />
+<h1>Class Style</h1>
+<div class="imgStyles">
+  <div>
+    <input type="number" [(ngModel)]="box.width" />
+    <input type="number" [(ngModel)]="box.height" />
+    <input type="color" [(ngModel)]="box.background" />
+  </div>
+  <div>
+    <div
+      [ngStyle]="{
+        'width.px': box.width,
+        'height.px': box.height,
+        'background-color': box.background,
+        display: 'block'
+      }"
+    ></div>
+  </div>
+</div>
+<br />
+<label>Nombre</label>
+<input type="text" required #nameInput2="ngModel" [(ngModel)]="person.name" />
+<br />
+<br />
+<p [style.font-style]="nameInput2.invalid ? 'italic' : 'normal'">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, voluptatem.
+</p>
+<br />
+<br />
+<br />
+<h1>Agregar clases y estilos de forma dinámica</h1>
+<div class="imgStyles">
+  <div>
+    <input type="text" [(ngModel)]="widthImg" />
+  </div>
+  <div>
+    <img
+      [style.width.px]="widthImg"
+      [src]="person.Image"
+      alt="Decoración en madera para habitación"
+    />
+  </div>
+</div>
+<br />
+<br />
+<h1>*ngFor y mostrar el indice del elemento</h1>
+<div>
+  <!-- agregamos el elemento de forma dinamica -->
+
+  <input type="text" required [(ngModel)]="dynamicName" />
+  <button (click)="addDynamicName()">Add Name</button>
+  <ul>
+    <li *ngIf="newNames.length === 0">No hay nombres</li>
+    <li *ngFor="let names of newNames; index as i">
+      {{ i }} {{ names }}
+      <button (click)="deleteDynamicName(i)">Delete</button>
+    </li>
+  </ul>
+</div>
+<br />
+<div class="products--grid">
+  <div *ngFor="let product of products">
+    <img [src]="product.img" alt="Decoración en madera para habitación" />
+    <h2>{{ product.price }}</h2>
+    <p>{{ product.name }}</p>
+  </div>
+</div>
+<hr />
+<h1>*ngIf</h1>
+<input type="text" required [(ngModel)]="person.name" />
+<p *ngIf="person.name === 'wendy'">Hola, soy Wendy</p>
+<p *ngIf="person.name === 'mari' && person.age === 35; else templateElse">
+  Hola, soy Mari
+</p>
+<!-- si necesito agregar un else debo crear un ngTemplate-->
+<ng-template #templateElse>
+  <div>El nombre de mari no coincide con la edad!!</div>
+</ng-template>
+<hr />
+<h1>ngModel</h1>
+<p>Nombre {{ person.name }}</p>
+<br />
+<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name" />
+<p>Valid: {{ nameInput.valid }}</p>
+<br />
+<p>Edad {{ person.age }}</p>
+<br />
+<input
+  type="number"
+  max="50"
+  min="18"
+  required
+  #ageInput="ngModel"
+  [(ngModel)]="person.age"
+/>
+<p>Valid: {{ ageInput.valid }}</p>
+<br />
+<hr />
+<h1>Event Binding</h1>
+<button [disabled]="btnDisable">Enviar</button>
+<br />
+<br />
+<button (click)="toggleButton()">Toggle Button</button>
+<br />
+<br />
+<p>Edad {{ person.age }}</p>
+<button (click)="increaseAge()">Age ++</button>
+<button (click)="decreaseAge()">Age --</button>
+<br />
+<div class="box" (scroll)="onScroll($event)">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus quibusdam
+    blanditiis quas labore ipsum, temporibus minima nisi cupiditate dolor eaque
+    dolorem iure distinctio eos odio ut reprehenderit maxime vero vitae illo.
+    Nesciunt dolor repellendus voluptatum, provident consequatur animi quod
+    quidem blanditiis commodi illo sequi accusantium excepturi dolorum porro
+    aspernatur harum!
+  </p>
+</div>
+
+<br />
+<input type="text" [value]="person.name" (keyup)="changeName($event)" />
+<p>Nombre {{ person.name }}</p>
+<br />
+<hr />
+<h1>Property Binding</h1>
+<img [src]="person.Image" alt="Avatar" />
+<br />
+<button [disabled]="btnDisable">Enviar</button>
+<input type="text" [value]="person.name" />
+<progress max="100" [value]="person.age"></progress>
+<br />
+<br />
+<hr />
+<h1>String Interpolation!!!</h1>
+<h2>
+  {{ "hola mundo,".repeat(4) }}
+</h2>
+<h3>Hola, soy {{ name }} y tengo {{ age }} años</h3>
+<img src="{{ img }}" alt="Avatar" />

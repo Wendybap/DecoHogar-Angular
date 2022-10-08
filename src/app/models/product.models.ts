@@ -1,7 +1,7 @@
-// ! ESTOS CORRESPONDE AL MODULO 1
 export interface Product {
+  id: string;
   name: string;
-  price?: number;
   img: string;
+  price: number;
   category?: string;
 }

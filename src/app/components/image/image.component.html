@@ -1,14 +1,14 @@
 <!-- Este componente renderiza una imagen por defecto y si la misma viene
 vacía renderizara la imagen que le pasemos al Input por URL
-  -->
+POR LO TANTO ES REUTILIZABLE  -->
 
 <img
-  width="200"
   (load)="imgLoaded()"
   (error)="errorImg()"
   [src]="img"
   *ngIf="img; else elseImg"
 />
+<!-- <h3>{{ counter }}</h3> -->
 <ng-template #elseImg>
-  <img width="200" [src]="imgDefault" alt="Avatar por defecto" />
+  <!-- <img width="200" [src]="imgDefault" alt="Avatar por defecto" /> -->
 </ng-template>

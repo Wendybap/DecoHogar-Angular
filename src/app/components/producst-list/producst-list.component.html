@@ -1,5 +1,11 @@
 <!-- ** Renderizado de Productos dinamicamente del padre al hijo -->
+<p>la cantidad de productos {{ myShoppingCart.length }}</p>
+<p>total: ${{ total }}</p>
 <div class="productsList--grid">
-  <app-product [myProduct]="product" *ngFor="let product of myProduct">
+  <app-product
+    [myProduct]="product"
+    *ngFor="let product of myProduct"
+    (addMyProduct)="onAddToShoppingCart($event)"
+  >
   </app-product>
 </div>

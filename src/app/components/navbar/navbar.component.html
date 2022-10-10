@@ -1,6 +1,6 @@
 <div class="show-mobile">
   <div>
-    <button>
+    <button (click)="toggleMenu()">
       <img
         src="https://static.platzi.com/media/tmp/class-files/github/angular-componentes/angular-componentes-8-step/src/assets/svg/icon_menu.svg"
         alt="menu"
@@ -19,6 +19,18 @@
       />
     </a>
   </div>
+  <div class="side-menu" [class.active]="activeMenu">
+    <button (click)="toggleMenu()">Cerrar</button>
+    <ul>
+      <li><a href="">Todos</a></li>
+      <li><a href="">Habitación</a></li>
+      <li><a href="">Oficina</a></li>
+      <li><a href="">Comedor</a></li>
+      <li><a href="">Cocina</a></li>
+      <li><a href="">Sala</a></li>
+      <li><a href="">Baños</a></li>
+    </ul>
+  </div>
 </div>
 <div class="hide-mobile">
   <div>
@@ -31,9 +43,13 @@
         />
       </a>
       <ul>
-        <li><a href="">All</a></li>
-        <li><a href="">Clothes</a></li>
-        <li><a href="">Electronics</a></li>
+        <li><a href="">Todos</a></li>
+        <li><a href="">Habitación</a></li>
+        <li><a href="">Oficina</a></li>
+        <li><a href="">Comedor</a></li>
+        <li><a href="">Cocina</a></li>
+        <li><a href="">Sala</a></li>
+        <li><a href="">Baños</a></li>
       </ul>
     </nav>
     <div class="info">

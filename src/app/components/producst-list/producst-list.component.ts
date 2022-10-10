@@ -13,6 +13,10 @@ export class ProducstListComponent implements OnInit {
   total = 0;
   myProduct: Product[] = [];
 
+  // Pipes para el manejo de fechas
+  today = new Date();
+  date = new Date(2022, 3, 12);
+
   // **Creamos una inyección de dependencias dentro del controlador
   // ** para usar los servicios que que necesite en este caso stroreService y productsService
   constructor(

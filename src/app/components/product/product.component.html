@@ -1,4 +1,4 @@
 <app-image [img]="myProduct.image"></app-image>
-<h2>{{ myProduct.price }}</h2>
-<p>{{ myProduct.title }}</p>
+<h2>{{ myProduct.price | currency: "ARS" }}</h2>
+<p>{{ myProduct.title | reverse }}</p>
 <button (click)="onAddToCart()">Agregar al carrito</button>

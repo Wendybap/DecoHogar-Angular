@@ -9,6 +9,8 @@ import { ImageComponent } from './components/image/image.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProducstListComponent } from './components/producst-list/producst-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ReversePipe } from './pipes/reverse.pipe';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ProductComponent,
     ProducstListComponent,
     NavbarComponent,
+    ReversePipe,
+    TimeAgoPipe,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
   providers: [],

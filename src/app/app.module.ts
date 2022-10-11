@@ -11,6 +11,7 @@ import { ProducstListComponent } from './components/producst-list/producst-list.
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     NavbarComponent,
     ReversePipe,
     TimeAgoPipe,
+    HighlightDirective,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
   providers: [],

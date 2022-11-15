@@ -4,11 +4,11 @@ import { StoreService } from 'src/app/services/store.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
-  selector: 'app-producst-list',
-  templateUrl: './producst-list.component.html',
-  styleUrls: ['./producst-list.component.scss'],
+  selector: 'app-products-list',
+  templateUrl: './products-list.component.html',
+  styleUrls: ['./products-list.component.scss'],
 })
-export class ProducstListComponent implements OnInit {
+export class ProductsListComponent implements OnInit {
   myShoppingCart: Product[] = [];
   total = 0;
   myProduct: Product[] = [];
@@ -23,7 +23,7 @@ export class ProducstListComponent implements OnInit {
     private storeService: StoreService,
     private productsService: ProductsService
   ) {
-    // Aqui obtengo la lista actual de elemntos que estan en el carrito de compras
+    // Aqui obtengo la lista actual de elementos que estan en el carrito de compras
     this.myShoppingCart = this.storeService.getShoppingCart();
   }
 

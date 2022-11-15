@@ -20,6 +20,7 @@ export class ImageComponent
 {
   // */ CON EL DECORADOR @Input pasamos info del PADRE al HIJO
   img: string = '';
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('img')
   set changeImg(newImg: string) {
     this.img = newImg;

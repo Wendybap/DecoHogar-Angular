@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ImageComponent } from './components/image/image.component';
 import { ProductComponent } from './components/product/product.component';
-import { ProducstListComponent } from './components/producst-list/producst-list.component';
+import { ProductsListComponent } from './components/products-list/products-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
@@ -18,7 +18,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     AppComponent,
     ImageComponent,
     ProductComponent,
-    ProducstListComponent,
+    ProductsListComponent,
     NavbarComponent,
     ReversePipe,
     TimeAgoPipe,

@@ -1,5 +1,10 @@
-<app-image [img]="myProduct.image"></app-image>
+<!-- Hago el *ngIf en images para asegurarnos de hacer la petición en la
+posición 0 si la imagen realmente existe  -->
+<app-image
+  *ngIf="myProduct.images.length > 0"
+  [img]="myProduct.images[0]"
+></app-image>
 <h2>{{ myProduct.price | currency: "ARS" }}</h2>
 <p>{{ myProduct.title | reverse }}</p>
-<p appHighlight>{{ myProduct.description }}</p>
+<!-- <p appHighlight>{{ myProduct.description }}</p> -->
 <button (click)="onAddToCart()">Agregar al carrito</button>

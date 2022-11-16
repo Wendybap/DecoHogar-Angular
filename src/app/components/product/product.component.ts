@@ -20,9 +20,16 @@ export class ProductComponent {
   };
 
   @Output() addMyProduct = new EventEmitter<Product>();
+  @Output() showProduct = new EventEmitter<string>();
+  // le enviamos solo un string porque solo necesitamos el id del producto
   constructor() {}
 
   onAddToCart() {
     this.addMyProduct.emit(this.myProduct);
+  }
+
+  // Funcion para ver detalle del producto
+  onShowDetail() {
+    this.showProduct.emit(this.myProduct.id);
   }
 }

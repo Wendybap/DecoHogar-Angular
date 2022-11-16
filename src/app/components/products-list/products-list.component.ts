@@ -1,17 +1,33 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Product } from 'src/app/models/product.models';
 import { StoreService } from 'src/app/services/store.service';
 import { ProductsService } from 'src/app/services/products.service';
+import SwiperCore, { EffectFlip, Pagination, Navigation } from 'swiper';
+SwiperCore.use([EffectFlip, Pagination, Navigation]);
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProductsListComponent implements OnInit {
   myShoppingCart: Product[] = [];
   total = 0;
   myProduct: Product[] = [];
+  showProductDetail = false;
+  // Creo el estado para el productChoosen
+  productChosen: Product = {
+    id: '',
+    title: '',
+    images: [],
+    price: 0,
+    description: '',
+    category: {
+      id: '',
+      name: '',
+    },
+  };
 
   // Pipes para el manejo de fechas
   today = new Date();
@@ -37,5 +53,17 @@ export class ProductsListComponent implements OnInit {
   onAddToShoppingCart(product: Product) {
     this.storeService.addProduct(product);
     this.total = this.storeService.getTotal();
+  }
+
+  // función toggle para activar y desactivar el detalle del producto
+  toggleProductDetail() {
+    this.showProductDetail = !this.showProductDetail;
+  }
+
+  onShowDetail(id: string) {
+    this.productsService.getProduct(id).subscribe((data) => {
+      this.toggleProductDetail();
+      this.productChosen = data;
+    });
   }
 }

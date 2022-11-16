@@ -6,5 +6,5 @@ posición 0 si la imagen realmente existe  -->
 ></app-image>
 <h2>{{ myProduct.price | currency: "ARS" }}</h2>
 <p>{{ myProduct.title | reverse }}</p>
-<!-- <p appHighlight>{{ myProduct.description }}</p> -->
+<button (click)="onShowDetail()">Ver detalle</button>
 <button (click)="onAddToCart()">Agregar al carrito</button>

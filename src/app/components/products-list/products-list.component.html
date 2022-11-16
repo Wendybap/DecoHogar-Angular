@@ -1,20 +1,30 @@
-<!-- ** Renderizado de Productos dinamicamente del padre al hijo -->
-<!-- <p>la cantidad de productos {{ myShoppingCart.length }}</p>
-<p>total: ${{ total }}</p>
-<p>today: {{ today | date }}</p>
-<p>today: {{ today | timeAgo }}</p>
-<p>date: {{ date | date: "dd/MM/yyyy" }}</p>
-<p>
-  {{
-    "este texto sera transformado todo en mayúscula gracias al pipes"
-      | uppercase
-  }}
-</p> -->
+<button (click)="toggleProductDetail()">Click</button>
 <div class="productsList--grid">
   <app-product
     [myProduct]="product"
     *ngFor="let product of myProduct"
     (addMyProduct)="onAddToShoppingCart($event)"
+    (showProduct)="onShowDetail($event)"
   >
   </app-product>
+</div>
+<div class="product-detail" [class.active]="showProductDetail">
+  <!-- esta *ngIf es para que el detalle del producto se muestre solo si hay
+  un producto seleccionado -->
+  <div *ngIf="productChosen">
+    <button (click)="toggleProductDetail()">Close</button>
+    <h1>{{ productChosen.title }}</h1>
+    <swiper
+      [effect]="'flip'"
+      [grabCursor]="true"
+      [pagination]="true"
+      [navigation]="true"
+      class="mySwiper"
+    >
+      <ng-template swiperSlide *ngFor="let img of productChosen.images"
+        ><img [src]="img" alt=""
+      /></ng-template>
+    </swiper>
+    <p>{{ productChosen.description }}</p>
+  </div>
 </div>

@@ -14,3 +14,12 @@ export interface Product {
 }
 
 // images: string[]; Indica que las imagenes son un array
+
+export interface CreateProductDTO
+  extends Omit<Product, 'id' | 'category' | 'rating'> {
+  categoryId: number;
+}
+
+// Interface para actualizar el product y con el partial le decimos que todos los
+// atributos sean opcionales, es decir que internamente les coloca el ? a todos los atributos
+export interface UpdateProductDTO extends Partial<CreateProductDTO> {}

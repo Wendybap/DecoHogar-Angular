@@ -1,4 +1,4 @@
-<button (click)="toggleProductDetail()">Click</button>
+<button (click)="createNewProduct()">Create</button>
 <div class="productsList--grid">
   <app-product
     [myProduct]="product"
@@ -26,5 +26,7 @@
       /></ng-template>
     </swiper>
     <p>{{ productChosen.description }}</p>
+    <button (click)="updateProduct()">Editar</button>
+    <button (click)="deleteProduct()">Delete</button>
   </div>
 </div>

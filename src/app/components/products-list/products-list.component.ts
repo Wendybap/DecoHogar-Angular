@@ -36,6 +36,10 @@ export class ProductsListComponent implements OnInit {
     },
   };
 
+  // creo esta variables para hacer la paginación dinamica
+  limit = 10;
+  offset = 0;
+
   // Pipes para el manejo de fechas
   today = new Date();
   date = new Date(2022, 3, 12);
@@ -51,9 +55,10 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // aqui obtengo los datos de la API
-    this.productsService.getAllProducts().subscribe((data) => {
+    // aqui obtengo los productos de la API por una pag en especifico (paginación)
+    this.productsService.getProductsByPage(10, 0).subscribe((data) => {
       this.myProduct = data;
+      this.offset += this.limit;
     });
   }
 
@@ -114,5 +119,15 @@ export class ProductsListComponent implements OnInit {
       this.myProduct.splice(productIndex, 1);
       this.showProductDetail = false;
     });
+  }
+
+  // metodo para cargar la siguiente paginas (paginación)
+  loadMore() {
+    this.productsService
+      .getProductsByPage(this.limit, this.offset)
+      .subscribe((data) => {
+        this.myProduct = this.myProduct.concat(data);
+        this.offset += this.limit;
+      });
   }
 }

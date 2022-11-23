@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {
   Product,
   CreateProductDTO,
@@ -17,13 +17,25 @@ export class ProductsService {
 
   // *Metodo que devuelve todos los productos haciendo la petición get a una URL
   // *Debo tipar mi petición para indicarle que es del tipo array de productos<Products[]>
-  getAllProducts() {
-    return this.httpClient.get<Product[]>(this.apiUrl);
+  getAllProducts(limit?: number, offset?: number) {
+    let params = new HttpParams();
+    if (limit && offset) {
+      params = params.set('limit', limit);
+      params = params.set('offset', limit);
+    }
+    return this.httpClient.get<Product[]>(this.apiUrl, { params });
   }
 
   // Metodo para obtener el detalle del producto
   getProduct(id: string) {
     return this.httpClient.get<Product>(`${this.apiUrl}/${id}`);
+  }
+
+  // Método para la paginación de los productos
+  getProductsByPage(limit: number, offset: number) {
+    return this.httpClient.get<Product[]>(`${this.apiUrl}`, {
+      params: { limit, offset },
+    });
   }
 
   // Metodo para crear un producto en la API, la informacion se envia por el body

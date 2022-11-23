@@ -1,4 +1,4 @@
-<button (click)="createNewProduct()">Create</button>
+<button (click)="createNewProduct()">Crear</button>
 <div class="productsList--grid">
   <app-product
     [myProduct]="product"
@@ -7,6 +7,7 @@
     (showProduct)="onShowDetail($event)"
   >
   </app-product>
+  <button (click)="loadMore()">Cargar más</button>
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
   <!-- esta *ngIf es para que el detalle del producto se muestre solo si hay

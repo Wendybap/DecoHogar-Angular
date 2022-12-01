@@ -1,34 +1,60 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpParams,
+  HttpErrorResponse,
+  HttpStatusCode,
+} from '@angular/common/http';
+import { retry, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
 import {
   Product,
   CreateProductDTO,
   UpdateProductDTO,
 } from '../models/product.models';
+import { Observable } from 'rxjs';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  private apiUrl = 'https://young-sands-07814.herokuapp.com/api/products';
+  private apiUrl = `${environment.API_URL}/api/products`;
 
   // Hago una inyección de dependencia que inyecta a otro servicio
   constructor(private httpClient: HttpClient) {}
 
   // *Metodo que devuelve todos los productos haciendo la petición get a una URL
   // *Debo tipar mi petición para indicarle que es del tipo array de productos<Products[]>
-  getAllProducts(limit?: number, offset?: number) {
+
+  getAllProducts(limit?: number, offset?: number): Observable<Product[]> {
     let params = new HttpParams();
     if (limit && offset) {
       params = params.set('limit', limit);
       params = params.set('offset', limit);
     }
-    return this.httpClient.get<Product[]>(this.apiUrl, { params });
+    return this.httpClient
+      .get<Product[]>(this.apiUrl, { params })
+      .pipe(retry(3));
   }
 
   // Metodo para obtener el detalle del producto
   getProduct(id: string) {
-    return this.httpClient.get<Product>(`${this.apiUrl}/${id}`);
+    return this.httpClient.get<Product>(`${this.apiUrl}/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === HttpStatusCode.Conflict) {
+          throw Error('falla en el server');
+        }
+        if (error.status === HttpStatusCode.NotFound) {
+          throw Error('el producto no existe');
+        }
+        if (error.status === HttpStatusCode.Unauthorized) {
+          throw Error('no estas autorizado');
+        }
+        throw Error('algo salio mal');
+      })
+    );
   }
 
   // Método para la paginación de los productos

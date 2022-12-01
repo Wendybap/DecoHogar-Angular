@@ -39,6 +39,8 @@ export class ProductsListComponent implements OnInit {
   // creo esta variables para hacer la paginación dinamica
   limit = 10;
   offset = 0;
+  // creo el estado para manejar lo errores
+  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   // Pipes para el manejo de fechas
   today = new Date();
@@ -73,10 +75,19 @@ export class ProductsListComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
-    this.productsService.getProduct(id).subscribe((data) => {
-      this.toggleProductDetail();
-      this.productChosen = data;
-    });
+    this.statusDetail = 'loading';
+    this.toggleProductDetail();
+    this.productsService.getProduct(id).subscribe(
+      (data) => {
+        this.toggleProductDetail();
+        this.productChosen = data;
+        this.statusDetail = 'success';
+      },
+      (errorMessage) => {
+        window.alert(errorMessage);
+        this.statusDetail = 'error';
+      }
+    );
   }
 
   // Funcion que usa el servicio para crear productos en la API

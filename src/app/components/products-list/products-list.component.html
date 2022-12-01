@@ -1,4 +1,6 @@
 <button (click)="createNewProduct()">Crear</button>
+<button (click)="onShowDetail('4325345')">Detalle no encontrado</button>
+
 <div class="productsList--grid">
   <app-product
     [myProduct]="product"
@@ -10,6 +12,7 @@
   <button (click)="loadMore()">Cargar más</button>
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
+  {{ statusDetail }}
   <!-- esta *ngIf es para que el detalle del producto se muestre solo si hay
   un producto seleccionado -->
   <div *ngIf="productChosen">
